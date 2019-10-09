@@ -6,9 +6,9 @@ const hasUnicode = require('has-unicode')
 module.exports = class Detectors {
   getColors() {
     return {
-      16: supportsColor.stdout.hasBasic,
-      256: supportsColor.stdout.has256,
-      '16m': supportsColor.stdout.has16m
+      16: !!supportsColor.stdout.hasBasic,
+      256: !!supportsColor.stdout.has256,
+      '16m': !!supportsColor.stdout.has16m
     }
   }
 
