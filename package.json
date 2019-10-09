@@ -3,6 +3,9 @@
   "version": "0.0.0-development",
   "description": "CLI to detect terminal support for properties like color, unicode and others",
   "main": "index.js",
+  "bin": {
+    "terminal-detect": "./bin/terminal-detect.js"
+  },
   "engines": {
     "node": ">=8.0.0"
   },
@@ -33,7 +36,10 @@
     "type": "git",
     "url": "https://github.com/lirantal/terminal-detect.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "has-unicode": "^2.0.1",
+    "supports-color": "^7.1.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
