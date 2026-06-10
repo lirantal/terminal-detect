@@ -1,4 +1,8 @@
 {
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
+  },
   "name": "terminal-detect",
   "version": "0.0.0-development",
   "description": "CLI to detect terminal support for properties like color, unicode and others",
