@@ -3,12 +3,12 @@
 ## Prerequisites
 
 - Node.js compatible with this repository's packages and tooling.
-- yarn for dependency installation and scripts.
+- npm for dependency installation and scripts.
 
 ## Setup
 
 ```sh
-yarn install
+npm ci
 ```
 
 ## Common Commands

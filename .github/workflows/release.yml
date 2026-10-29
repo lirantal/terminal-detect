@@ -25,14 +25,14 @@ jobs:
         with:
           node-version: 24.x
       - name: install dependencies
-        run: yarn install --frozen-lockfile --ignore-engines
+        run: npm ci
       - name: build project
-        run: yarn run build
+        run: npm run build
       - name: Create Release Pull Request or Publish to npm
         uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1.9.0
         with:
-          publish: yarn run release
-          version: yarn run version
+          publish: npm run release
+          version: npm run version
           commit: "chore: new release"
           title: "chore: new release candidate"
         env:
