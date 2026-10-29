@@ -1,6 +1,6 @@
 'use strict'
 
-const supportsColor = require('supports-color')
+const {default: supportsColor} = require('supports-color')
 const hasUnicode = require('has-unicode')
 
 module.exports = class Detectors {

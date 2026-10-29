@@ -23,7 +23,7 @@ jobs:
           node-version: '24.x'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile --ignore-engines
+        run: npm ci
 
       - name: Markdown Lint
-        run: yarn run lint:markdown || true
+        run: npm run lint:markdown || true

@@ -12,11 +12,11 @@
   },
   "scripts": {
     "lint": "eslint . && npm run lint:lockfile",
-    "lint:lockfile": "lockfile-lint --path yarn.lock --type yarn --validate-https --allowed-hosts npm yarn",
+    "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --validate-https --allowed-hosts npm yarn",
     "lint:fix": "eslint . --fix",
     "format": "prettier --config .prettierrc.js --write '**/*.js'",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "c8 node --test",
+    "test:watch": "c8 node --test --watch",
     "coverage:view": "open-cli coverage/lcov-report/index.html",
     "build": "echo \"No build step configured\"",
     "lint:markdown": "markdownlint -c .github/.markdownlint.yml -i 'apm_modules/**' -i '.git' -i '__tests__' -i '.github' -i '.changeset' -i 'CODE_OF_CONDUCT.md' -i 'CHANGELOG.md' -i 'docs/**' -i '.superpowers/**' -i 'node_modules' -i 'dist' '**/**.md'",
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "has-unicode": "^2.0.1",
-    "supports-color": "^7.1.0"
+    "supports-color": "^11.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",
@@ -67,45 +67,21 @@
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^3.0.0",
-    "jest": "^24.8.0",
     "lint-staged": "^9.2.0",
-    "lockfile-lint": "^2.0.1",
+    "lockfile-lint": "^4.14.1",
     "open-cli": "^5.0.0",
     "prettier": "^1.18.2",
     "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.31.0",
     "markdownlint-cli": "0.49.1",
-    "semantic-release": "25.0.9"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "verbose": true,
-    "notify": true,
-    "collectCoverage": true,
-    "coverageThreshold": {
-      "global": {
-        "branches": 80,
-        "functions": 80,
-        "lines": 80,
-        "statements": 80
-      }
-    },
-    "testPathIgnorePatterns": [
-      "/__tests__/.*/__fixtures__/.*"
-    ],
-    "collectCoverageFrom": [
-      "index.js",
-      "src/**/*.{js,ts}"
-    ],
-    "testMatch": [
-      "**/*.test.js"
-    ]
+    "semantic-release": "25.0.9",
+    "c8": "^12.0.0"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint --env HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged",
-      "post-merge": "yarn install",
+      "post-merge": "npm ci",
       "pre-push": "npm run lint && npm run test"
     }
   },
@@ -200,5 +176,22 @@
   "publishConfig": {
     "provenance": true,
     "access": "public"
+  },
+  "c8": {
+    "all": true,
+    "include": [
+      "index.js",
+      "src/**/*.js"
+    ],
+    "reporter": [
+      "text",
+      "lcov",
+      "html"
+    ],
+    "check-coverage": true,
+    "branches": 80,
+    "functions": 80,
+    "lines": 80,
+    "statements": 80
   }
 }

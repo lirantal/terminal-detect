@@ -1,22 +1,24 @@
 # Release
 
-This project uses [Changesets](https://github.com/changesets/changesets) for versioning and release notes.
+This project uses Changesets CLI 2 with changesets/action 1. CI uses the committed
+npm lockfile and runs `npm ci`; engine, source and release-age settings remain
+in `.npmrc`.
 
-## Release Flow
+## Record a change
 
-1. Ensure all intended changes are merged and CI is green.
-2. Run `yarn version` to apply Changesets version and changelog updates.
-3. Review the generated package and changelog changes.
-4. Run the release command, if configured for the repository.
+For a published runtime change, run `npm exec changeset` or write a patch
+changeset under `.changeset/` using the package name from `package.json`.
+CI-only and test-only changes usually do not need a version bump.
 
-No root `release` script is currently defined. Use the repository's publishing workflow or add one before publishing.
+## Version and publish
 
-## Changesets
-
-Add a changeset for user-facing package behavior changes:
+The release workflow runs on `master`. It creates the release PR or runs the
+configured publish command. For an intentional manual release, use:
 
 ```sh
-yarn changeset
+npm run version
+npm run build
+npm run release
 ```
 
-Documentation-only, test-only, and internal refactor PRs usually do not need a changeset unless they describe or accompany a release-worthy behavior change.
+`npm run release` publishes packages; do not run it merely to validate a PR.

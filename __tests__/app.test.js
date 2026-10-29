@@ -1,23 +1,27 @@
+/* eslint-disable security/detect-child-process */
 'use strict'
 
+const {test} = require('node:test')
+const assert = require('node:assert/strict')
+const {execFileSync} = require('node:child_process')
+const path = require('node:path')
 const Detectors = require('../src/Detectors')
 
-describe('Detectors', () => {
-  test('Colors should return a valid object with detected colors', () => {
-    const detector = new Detectors()
-    const colors = detector.getColors()
-    expect(colors).toMatchObject({
-      16: expect.any(Boolean),
-      256: expect.any(Boolean),
-      '16m': expect.any(Boolean)
-    })
-  })
-
-  test('Charset should return a valid object with detected charset values', () => {
-    const detector = new Detectors()
-    const colors = detector.getCharset()
-    expect(colors).toMatchObject({
-      unicode: expect.any(Boolean)
-    })
-  })
+test('Colors returns boolean capability flags with the real supports-color dependency', () => {
+  const colors = new Detectors().getColors()
+  assert.deepEqual(Object.keys(colors).sort(), ['16', '16m', '256'])
+  Object.values(colors).forEach(value => assert.equal(typeof value, 'boolean'))
 })
+
+test('Charset returns a boolean unicode capability', () => {
+  assert.equal(typeof new Detectors().getCharset().unicode, 'boolean')
+})
+
+for (const [forceColor, supported] of [['0', false], ['3', true]]) {
+  test(`FORCE_COLOR=${forceColor} works through the CommonJS entry point`, () => {
+    const output = execFileSync(process.execPath, ['-e',
+      "const Detectors = require('./src/Detectors'); process.stdout.write(JSON.stringify(new Detectors().getColors()))"
+    ], {cwd: path.join(__dirname, '..'), env: Object.assign({}, process.env, {FORCE_COLOR: forceColor})})
+    assert.deepEqual(JSON.parse(output.toString()), {16: supported, 256: supported, '16m': supported})
+  })
+}
