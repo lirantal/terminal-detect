@@ -1,6 +1,6 @@
 {
   "name": "terminal-detect",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "CLI to detect terminal support for properties like color, unicode and others",
   "main": "index.js",
   "bin": {

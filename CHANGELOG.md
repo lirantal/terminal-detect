@@ -1,11 +1,5 @@
 # terminal-detect
 
-## 1.1.0
-
-### Minor Changes
-
-- Prepare the 1.1.0 release.
-
 ## 0.0.0
 
 ### Patch Changes
