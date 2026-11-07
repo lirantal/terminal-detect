@@ -65,7 +65,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-security": "^4.2.0",
-    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-standard": "^5.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "lockfile-lint": "^5.0.1",
