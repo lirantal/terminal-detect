@@ -70,7 +70,7 @@
     "lint-staged": "^17.6.0",
     "lockfile-lint": "^5.0.1",
     "open-cli": "^9.0.0",
-    "prettier": "^1.18.2",
+    "prettier": "^3.9.9",
     "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.3",
     "markdownlint-cli": "0.49.1",
