@@ -1,6 +1,6 @@
 # Release
 
-This project uses Changesets CLI 2 with changesets/action 1. CI uses the committed
+This project uses Changesets CLI 3 with changesets/action 2. CI uses the committed
 npm lockfile and runs `npm ci`; engine, source and release-age settings remain
 in `.npmrc`.
 
